@@ -1,0 +1,53 @@
+.document-page {
+  background: #f5f7fb;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.document-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.document-actions button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  background: #e67e00;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.doc-page {
+  background: white;
+  margin: 0 auto 30px;
+  width: fit-content;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.page-break {
+  page-break-after: always;
+}
+
+@media print {
+  .no-print,
+  .document-actions {
+    display: none !important;
+  }
+
+  .document-page {
+    padding: 0;
+    background: white;
+  }
+
+  .doc-page {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    page-break-after: always;
+  }
+}

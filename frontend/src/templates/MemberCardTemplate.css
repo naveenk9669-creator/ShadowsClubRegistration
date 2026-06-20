@@ -1,0 +1,262 @@
+/* Container framework to isolate print area style contexts */
+.mc-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f5f6f8;
+  padding: 40px;
+}
+
+/* Card Body container establishing Navy Blue background & Dimensions */
+.mc-card-body {
+  width: 650px;
+  height: 380px;
+  background: linear-gradient(135deg, #05266b 0%, #021641 100%);
+  border-radius: 24px;
+  padding: 24px 28px;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+/* Header context aligning Title and Right badge graphic */
+.mc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.mc-club-title {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  max-width: 75%; /* Gives title room while preventing wrap clashes */
+}
+
+/* Forces title onto one clean sharp line */
+.mc-single-line-title {
+  color: #df9e28;
+  font-size: 1.45rem; 
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.mc-member-card-title {
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin: 4px 0 0 0;
+}
+
+/* Logo Badge Formatting */
+.mc-logo-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mc-badge-top {
+  background-color: #d62222;
+  color: #ffffff;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  transform: translateY(3px);
+}
+
+.mc-badge-main {
+  color: #df9e28;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+/* Profile Row for Image and Parallel Text Alignment */
+.mc-profile-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.mc-photo-frame {
+  width: 105px;
+  height: 125px;
+  border: 1.5px solid #df9e28;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #010d29;
+  flex-shrink: 0;
+}
+
+.mc-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Name and ID values scaled down and aligned parallel next to image */
+.mc-identity-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.mc-member-name-text {
+  color: #ffffff;
+  font-size: 1.55rem; /* Scaled down from 1.9rem to prevent visual bulk */
+  font-weight: 600;
+  margin: 0 0 6px 0;
+}
+
+.mc-member-id-value {
+  color: #8fa4c3;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* Base Metadata Footer Layout Adjustment */
+.mc-footer-meta {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 20px; /* Shifted upward to keep content out of golden bottom bar */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mc-footer-label {
+  color: #627b9f;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.mc-phone-block {
+  width: 30%;
+  text-align: left;
+}
+
+.mc-footer-value-text {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.mc-address-block {
+  width: 65%;
+  text-align: right;
+}
+
+.mc-address-value-text {
+  color: #ffffff;
+  font-size: 0.72rem;
+  line-height: 1.35;
+  font-weight: 400;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+/* Decorative Gold Bar at the extreme bottom edge */
+.mc-gold-accent-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: #df9e28;
+}
+
+/* Peripheral note outside the card */
+.mc-card-print-note {
+  color: #7c889b;
+  font-size: 0.8rem;
+  text-align: center;
+  line-height: 1.5;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+.card-footer-property-text {
+  width: 100%;
+  text-align: center;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 11px; /* Scaled down perfectly for a card layout */
+  font-weight: 500;
+  color: #df9e28; /* Clean slate-charcoal gray shade matching the image */
+  line-height: 1.4;
+  margin-top: 8px; /* Safe breathing space below the gold bar edge */
+  letter-spacing: 0.2px;
+}
+
+/* Container wrapper setup to replace the text badge box layout */
+.mc-logo-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 95px;          /* Preserves horizontal space balance in header */
+  height: auto;
+  max-height: 30px;     /* Keeps the logo clean inside the dark blue bar context */
+  margin-left: auto;    /* Pushes neatly into the far right corner frame edge */
+  padding-right: 5px;
+}
+
+/* Image containment rules to preserve transparent proportions */
+.mc-brand-logo-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;  /* Makes sure the football and text graphics don't squash */
+  display: block;
+}
+
+/* Property terms strip spacing styling rules */
+.card-footer-property-text {
+  width: 100%;
+  text-align: center;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #df9e28;
+  line-height: 1.4;
+  margin-top: 8px;
+  letter-spacing: 0.2px;
+}
+.mc-logo-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 95px;          /* Preserves horizontal space balance in header */
+  height: auto;
+  max-height: 30px;     /* Allows a clean height bounds */
+  margin-left: auto;    /* Pushes cleanly into the far right corner frame edge */
+  margin-top: -6px;     /* Shifts the logo up into the header frame */
+  padding-right: 5px;
+}
+
+.mc-brand-logo-img {
+  width: 150%;
+  height: auto;
+  object-fit: contain;  /* Keeps the soccer ball and text crisp and un-stretched */
+  display: block;
+}

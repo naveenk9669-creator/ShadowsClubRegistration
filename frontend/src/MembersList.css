@@ -1,0 +1,525 @@
+.members-page {
+  min-height: 100vh;
+  background: #f4f7fb;
+}
+
+.members-header {
+  height: 150px;
+  background: #081428;
+  color: #ffc629;
+  display: flex;
+  align-items: center;
+  gap: 45px;
+  padding: 0 11%;
+}
+
+.back-icon {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.members-header h1 {
+  font-size: 32px;
+  letter-spacing: 10px;
+  font-weight: 900;
+}
+
+.members-header p {
+  font-size: 24px;
+  color: #d8bd4d;
+  margin-top: 6px;
+}
+
+.members-main {
+  width: 78%;
+  max-width: 900px;
+  margin: 38px auto;
+}
+
+.search-box {
+  height: 92px;
+  background: white;
+  border: 1px solid #dbe3ee;
+  border-radius: 24px;
+  box-shadow: 0 4px 12px rgba(8, 20, 40, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 34px;
+  margin-bottom: 36px;
+  color: #8291a6;
+}
+
+.search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 27px;
+  color: #071226;
+  background: transparent;
+}
+
+.member-card {
+  background: white;
+  border: 1px solid #e1e7f0;
+  border-radius: 28px;
+  padding: 34px;
+  margin-bottom: 28px;
+  box-shadow: 0 4px 12px rgba(8, 20, 40, 0.06);
+}
+
+.member-top {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: #fff2b9;
+  color: #bf5f00;
+  font-size: 50px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-card h2 {
+  font-size: 38px;
+  color: #071226;
+}
+
+.member-card p,
+.member-meta {
+  font-size: 24px;
+  color: #5f6f88;
+}
+
+.member-meta {
+  display: flex;
+  gap: 28px;
+  margin-top: 12px;
+}
+
+.member-card hr {
+  border: none;
+  border-top: 1px solid #dbe3ee;
+  margin: 26px 0;
+}
+
+.member-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 50px;
+  gap: 16px;
+  align-items: center;
+}
+
+.member-actions button {
+  height: 70px;
+  border-radius: 20px;
+  border: 1px solid #dbe3ee;
+  background: white;
+  color: #071226;
+  font-size: 24px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  box-shadow: 0 3px 8px rgba(8, 20, 40, 0.08);
+}
+
+.member-actions .pdf-btn {
+  color: #e47a00;
+  border-color: #ffc629;
+}
+
+.delete-btn {
+  color: #ff3b3b !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.58);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  backdrop-filter: blur(5px);
+}
+
+.member-modal {
+  width: 72%;
+  max-width: 900px;
+  background: white;
+  border-radius: 28px;
+  padding: 50px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  right: 42px;
+  top: 42px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.member-modal h2 {
+  font-size: 42px;
+  color: #071226;
+}
+
+.member-modal p {
+  font-size: 28px;
+  color: #5f6f88;
+}
+
+.member-modal hr {
+  border: none;
+  border-top: 3px solid #dbe3ee;
+  margin: 34px 0;
+}
+
+.modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.modal-actions button {
+  height: 88px;
+  border-radius: 20px;
+  font-size: 26px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.download-btn {
+  background: #e47a00;
+  color: white;
+  border: none;
+}
+
+.print-btn {
+  background: white;
+  color: #e47a00;
+  border: 1.5px solid #ffc629;
+}
+
+.members-header {
+  height: 82px;
+  padding: 0 14%;
+  gap: 22px;
+}
+
+.members-header h1 {
+  font-size: 22px;
+  letter-spacing: 7px;
+}
+
+.members-header p {
+  font-size: 15px;
+}
+
+.members-main {
+  width: 70%;
+  max-width: 620px;
+  margin: 26px auto;
+}
+
+.search-box {
+  height: 56px;
+  border-radius: 16px;
+  padding: 0 20px;
+  margin-bottom: 24px;
+}
+
+.search-box input {
+  font-size: 18px;
+}
+
+.member-card {
+  padding: 22px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 58px;
+  height: 58px;
+  font-size: 30px;
+}
+
+.member-card h2 {
+  font-size: 24px;
+}
+
+.member-card p,
+.member-meta {
+  font-size: 15px;
+}
+
+.member-meta {
+  gap: 18px;
+  margin-top: 6px;
+}
+
+.member-card hr {
+  margin: 16px 0;
+}
+
+.member-actions {
+  grid-template-columns: 1fr 1fr 1fr 36px;
+  gap: 10px;
+}
+
+.member-actions button {
+  height: 42px;
+  border-radius: 14px;
+  font-size: 15px;
+}
+
+.delete-modal h2 {
+  color: #071226;
+}
+
+.delete-modal p {
+  font-size: 22px;
+  color: #5f6f88;
+  margin-top: 8px;
+}
+
+.delete-member-id {
+  color: #e47a00 !important;
+  font-weight: 800;
+}
+
+.danger-btn {
+  background: #e53935;
+  color: white;
+  border: none;
+}
+
+.member-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.member-actions button {
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid #d6dbe5;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.card-btn,
+.form-btn {
+  color: #d97706;
+  border-color: #fbbf24;
+}
+
+.delete-btn {
+  color: #ef4444;
+}
+
+.delete-modal {
+  width: 420px !important;
+  max-width: 90%;
+  padding: 28px 32px !important;
+  border-radius: 18px !important;
+}
+
+.delete-modal h2 {
+  font-size: 24px !important;
+  margin-bottom: 8px;
+}
+
+.delete-modal p {
+  font-size: 15px !important;
+  margin: 4px 0;
+}
+
+.delete-member-id {
+  font-size: 15px !important;
+}
+
+.delete-modal hr {
+  margin: 20px 0 !important;
+}
+
+.delete-modal .modal-actions {
+  gap: 12px;
+}
+
+.delete-modal .modal-actions button {
+  height: 46px !important;
+  font-size: 15px !important;
+  border-radius: 12px !important;
+}
+
+.delete-modal {
+  position: relative;
+}
+
+.delete-modal .modal-close {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: #8a95a6;
+  font-size: 26px;
+  line-height: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.delete-modal .modal-close:hover {
+  color: #071226;
+}
+
+.hidden-pdf-area {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  background: white;
+}
+
+.members-header {
+  height: 76px;
+  background: #081428;
+  color: #ffc629;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 calc(50% - 255px);
+}
+
+.back-icon {
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.members-header h1 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 4px;
+  font-weight: 900;
+}
+
+.members-header p {
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: #d8bd4d;
+}
+
+.member-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.member-info {
+  flex: 1;
+  text-align: left;
+}
+
+.avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fff2b9;
+  color: #bf5f00;
+  font-size: 30px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.member-card h2 {
+  margin: 0 0 4px;
+  font-size: 23px;
+  color: #071226;
+  line-height: 1.2;
+}
+
+.member-card p {
+  margin: 0;
+  font-size: 13px;
+  color: #5f6f88;
+}
+
+.member-meta {
+  display: flex;
+  gap: 16px;
+  margin-top: 7px;
+  font-size: 13px;
+  color: #5f6f88;
+}
+
+.member-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 34px;
+  gap: 10px;
+  align-items: center;
+}
+
+.member-actions button {
+  height: 42px;
+  border-radius: 11px;
+  border: 1px solid #dbe3ee;
+  background: white;
+  color: #071226;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  box-shadow: 0 2px 6px rgba(8, 20, 40, 0.08);
+}
+
+.member-actions .pdf-btn {
+  color: #e47a00;
+  border-color: #ffc629;
+}
+
+.delete-btn {
+  color: #ff3b3b !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  font-size: 20px !important;
+}
+
+.member-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 40px;
+  gap: 10px;
+  align-items: center;
+}

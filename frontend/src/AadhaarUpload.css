@@ -1,0 +1,428 @@
+.aadhaar-page {
+  min-height: 100vh;
+  background: #f4f7fb;
+  color: #071226;
+}
+
+.top-header {
+  height: 85px;
+  background: #081428;
+  color: #ffc629;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 26%;
+}
+
+.top-header h1 {
+  font-size: 21px;
+  letter-spacing: 6px;
+  font-weight: 800;
+  color: #ffc629;
+
+}
+
+.top-header p {
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+.header-icons {
+  display: flex;
+  gap: 24px;
+  font-size: 18px;
+}
+
+.aadhaar-main {
+  max-width: 520px;
+  margin: 32px auto 120px;
+}
+
+.stepper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 65px;
+}
+
+.step {
+  text-align: center;
+  color: #617083;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.step div {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #eef3f9;
+  color: #8a98aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.step.active div,
+.step.done div {
+  background: #e47a00;
+  color: white;
+}
+
+.step-line {
+  width: 105px;
+  height: 4px;
+  margin: 20px 20px 0;
+}
+
+.upload-card {
+  background: white;
+  border-radius: 24px;
+  padding: 36px 34px;
+  box-shadow: 0 2px 8px rgba(8, 20, 40, 0.08);
+  border: 1px solid #e7edf5;
+}
+
+.upload-card h2 {
+  font-size: 25px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: black !important;
+
+}
+
+.doc-icon {
+  color: #e47a00;
+}
+
+.drop-box {
+  height: 185px;
+  border: 2px dashed #ffd451;
+  border-radius: 14px;
+  background: #fffdf6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.upload-icon {
+  color: #db7600;
+  font-size: 54px;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.drop-box h3 {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.drop-box p {
+  color: #66758a;
+  font-size: 14px;
+}
+
+.camera-btn {
+  width: 100%;
+  height: 45px;
+  border: 1.5px solid #f0a000;
+  background: white;
+  color: #c85f00;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+.loading-text {
+  color: #c85f00;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.success-text {
+  color: #00a651;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid #dbe3ee;
+  background: #f8fbff;
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 15px;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(8, 20, 40, 0.05);
+}
+
+.form-group textarea {
+  height: 92px;
+  resize: vertical;
+}
+
+.card-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.card-actions.two-buttons {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card-actions .main-action-btn,
+.card-actions .outline-action-btn {
+  flex: 1;
+  min-width: 140px;
+}
+
+.camera-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 45px;
+  border: 1.5px solid #f0a000;
+  background: white;
+  color: #c85f00;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+.success-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #00a651;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 76px;
+  background: white;
+  border-top: 1px solid #dbe3ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.bottom-bar button {
+  width: 220px;
+  height: 48px;
+  border: none;
+  border-radius: 11px;
+  background: #e47a00;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.back-button {
+  background: #ffffff !important;
+  color: #071226 !important;
+  border: 1px solid #dbe3ee !important;
+}
+
+@media (max-width: 700px) {
+  .top-header {
+    padding: 0 20px;
+  }
+
+  .top-header h1 {
+    font-size: 17px;
+    letter-spacing: 3px;
+    color: #ffc629;
+  }
+
+  .top-header p {
+    text-align: justify;
+    color: #ffc629;
+    line-height: 1;
+}
+
+.upload-card h2 {
+    font-size: 25px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: black !important;
+}
+
+  .aadhaar-main {
+    width: 88%;
+  }
+
+  .step-line {
+    width: 70px;
+  }
+
+  .upload-card {
+    padding: 30px 22px;
+  }
+}
+.logout-icon {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-icon:hover {
+  color: white;
+  transform: scale(1.15);
+}
+.readonly-field {
+  background: #f1f3f5 !important;
+  cursor: not-allowed;
+  color: #555;
+}
+.photo-preview-box {
+  text-align: center;
+}
+
+.photo-preview {
+  width: 155px;
+  height: 185px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 16px auto;
+  display: block;
+  box-shadow: 0 4px 12px rgba(8, 20, 40, 0.18);
+}
+
+.change-photo-btn {
+  height: 38px;
+  padding: 0 22px;
+  border: 1px solid #dbe3ee;
+  background: #ffffff;
+  color: #071226;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.preview-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 34px 32px;
+  box-shadow: 0 2px 8px rgba(8, 20, 40, 0.12);
+  border: 1px solid #e7edf5;
+  text-align: center;
+}
+
+.preview-card h2 {
+  font-size: 22px;
+  margin-bottom: 22px;
+}
+
+.preview-card hr {
+  border: none;
+  border-top: 1px solid #dbe3ee;
+  margin: 18px 0;
+}
+
+.success-alert {
+  background: #002c16;
+  color: #7dffad;
+  border: 1px solid #006b34;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-weight: 800;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.main-action-btn,
+.outline-action-btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+.main-action-btn {
+  border: none;
+  background: #e47a00;
+  color: white;
+}
+
+.outline-action-btn {
+  border: 1.5px solid #e47a00;
+  background: white;
+  color: #e47a00;
+}
+
+.text-action-btn {
+  display: block;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #071226;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.text-action-btn.orange {
+  color: #e47a00;
+}
+
+.step-line {
+  width: 120px;
+  height: 4px;
+  background: #e8edf5;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.active-line {
+  background: #e47a00;
+}
+
+.header-action-icon {
+  cursor: pointer;
+}
+
+.header-action-icon:hover,
+.logout-icon:hover {
+  color: white;
+}

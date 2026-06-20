@@ -1,0 +1,452 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.login-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at bottom right, rgba(179, 72, 10, 0.55), transparent 32%),
+    linear-gradient(135deg, #081428 0%, #0d1426 45%, #17131d 70%, #2b140b 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.brand h1,
+.brand h2 {
+  color: #ffc629;
+  letter-spacing: 14px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.brand h1 {
+  font-size: 34px;
+}
+
+.brand h2 {
+  font-size: 34px;
+}
+
+.brand p {
+  margin-top: 14px;
+  color: #d8bd4d;
+  letter-spacing: 3px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.login-card {
+  width: 500px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 42px 38px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+}
+
+.login-card h3 {
+  text-align: center;
+  font-size: 32px;
+  color: #071226;
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+
+.subtitle {
+  text-align: center;
+  color: #59677e;
+  font-size: 15px;
+  margin-bottom: 42px;
+}
+
+form label {
+  display: block;
+  color: #071226;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.input-box {
+  width: 100%;
+  height: 58px;
+  border: 1px solid #d9e1ec;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  margin-bottom: 28px;
+  background: #f8fafc;
+}
+
+.input-box span {
+  margin-right: 14px;
+  color: #8190a6;
+  font-size: 16px;
+}
+
+.input-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 16px;
+  color: #071226;
+}
+
+.input-box input::placeholder {
+  color: #6f7d91;
+}
+
+.signin-btn {
+  width: 100%;
+  height: 60px;
+  border: none;
+  border-radius: 13px;
+  background: linear-gradient(180deg, #f28a00, #df7200);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 34px 0;
+}
+
+.divider span {
+  flex: 1;
+  height: 1px;
+  background: #d8e0ea;
+}
+
+.divider p {
+  font-size: 14px;
+  color: #6f7d91;
+}
+
+.create-btn {
+  width: 100%;
+  height: 60px;
+  border: 1.5px solid #e87800;
+  border-radius: 13px;
+  background: #ffffff;
+  color: #e87800;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.footer-text {
+  margin-top: 32px;
+  color: #d8bd4d;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .login-card {
+    width: 90%;
+    padding: 34px 24px;
+  }
+
+  .brand h1,
+  .brand h2 {
+    font-size: 24px;
+    letter-spacing: 8px;
+  }
+}
+
+.message-text {
+  margin-top: -12px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #d45b00;
+  text-align: center;
+}
+
+.back-btn {
+  width: 100%;
+  height: 52px;
+  border: none;
+  background: transparent;
+  color: #e87800;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 18px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid #dbe3ee;
+  background: #f8fbff;
+  border-radius: 12px;
+  padding: 11px 14px;
+  font-size: 15px;
+  outline: none;
+  color: #000000 !important;
+  font-weight: 500;
+  color: #666;
+}
+
+.top-header {
+  height: 95px;
+  background: #081428;
+  color: #ffc629;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 15px 26% 0;
+}
+
+.top-header h1 {
+  font-size: 21px;
+  letter-spacing: 6px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.top-header p {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #ffc629;
+  line-height: 1;
+}
+form label {
+    display: block;
+    color: #071226;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+
+
+
+.input-icon {
+  padding-right: 8px;
+  font-size: 22px;
+}
+
+.aadhaar-page {
+  min-height: 100vh;
+  background: #f4f7fb;
+  color: #071226;
+}
+
+.top-header {
+  width: 100%;
+  height: 88px;
+  background: #081428;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.top-header > div:first-child {
+  width: 520px;
+  text-align: left;
+}
+
+.top-header h1 {
+  margin: 0;
+  color: #ffc629;
+  font-size: 21px;
+  letter-spacing: 5px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.top-header p {
+  margin: 4px 0 0;
+  color: #ffc629;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.header-icons {
+  position: absolute;
+  right: calc(50% - 260px);
+  top: 34px;
+  display: flex;
+  gap: 24px;
+  color: #ffc629;
+  cursor: pointer;
+}
+
+.aadhaar-main {
+  width: 100%;
+  max-width: 520px;
+  margin: 34px auto 100px;
+}
+
+.stepper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 66px;
+}
+
+.step {
+  text-align: center;
+  color: #617083;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1px;
+  min-width: 72px;
+}
+
+.step div {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #eef3f9;
+  color: #8a98aa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.step.active div,
+.step.done div {
+  background: #e47a00;
+  color: white;
+}
+
+.step-line {
+  width: 100px;
+  height: 4px;
+  background: #eef3f9;
+  margin: 20px 8px 0;
+  border-radius: 10px;
+}
+
+.active-line {
+  background: #e47a00;
+}
+
+.upload-card {
+  background: white;
+  border-radius: 24px;
+  padding: 36px 34px;
+  box-shadow: 0 2px 8px rgba(8, 20, 40, 0.08);
+  border: 1px solid #e7edf5;
+}
+
+.upload-card h2 {
+  font-size: 25px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.doc-icon,
+.upload-icon {
+  color: #e47a00;
+}
+
+.drop-box {
+  height: 185px;
+  border: 2px dashed #ffd451;
+  border-radius: 14px;
+  background: #fffdf6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.drop-box h3 {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.drop-box p {
+  color: #66758a;
+  font-size: 14px;
+}
+
+.camera-btn {
+  width: 100%;
+  height: 45px;
+  border: 1.5px solid #f0a000;
+  background: white;
+  color: #c85f00;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (max-width: 600px) {
+  .top-header {
+    height: 88px;
+    justify-content: flex-start;
+    padding: 0 22px;
+  }
+
+  .top-header > div:first-child {
+    width: auto;
+    max-width: 270px;
+  }
+
+  .top-header h1 {
+    font-size: 17px;
+    letter-spacing: 4px;
+  }
+
+  .top-header p {
+    font-size: 12px;
+  }
+
+  .header-icons {
+    right: 22px;
+    top: 34px;
+    gap: 18px;
+  }
+
+  .aadhaar-main {
+    width: 100%;
+    max-width: 520px;
+    padding: 0 18px;
+    margin-top: 34px;
+  }
+
+  .step-line {
+    width: 60px;
+  }
+
+  .upload-card {
+    padding: 30px 24px;
+  }
+}
