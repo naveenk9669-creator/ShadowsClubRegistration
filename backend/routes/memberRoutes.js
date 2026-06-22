@@ -4,7 +4,7 @@ const Tesseract = require("tesseract.js");
 const path = require("path");
 const fs = require("fs");
 const sharp = require("sharp");
-const pdfPoppler = require("pdf-poppler");
+//const pdfPoppler = require("pdf-poppler");
 const Counter = require("../models/Counter");
 const Member = require("../models/Member");
 
@@ -334,7 +334,7 @@ async function normalizeToJpeg(filePath, mimetype, filename) {
         dpi: 200,
       };
 
-      await pdfPoppler.convert(filePath, options);
+      //await pdfPoppler.convert(filePath, options);
       const convertedPath = path.join(tempDir, `${baseName}-1.jpg`);
       const jpegBuffer = await fs.promises.readFile(convertedPath);
       await fs.promises.unlink(convertedPath).catch(() => {});
