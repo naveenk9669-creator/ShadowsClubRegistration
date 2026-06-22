@@ -3,12 +3,28 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
+const allowedOrigins = [
+  'http://localhost:3000',                  // Local React (Create React App)
+  'http://localhost:5173',                  // Local React (Vite)
+  'https://shadowsclubregistration.vercel.app' // Your live Vercel URL
+];
+
 const memberRoutes = require("./routes/memberRoutes");
 const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 app.use("/uploads", express.static("uploads"));
@@ -30,25 +46,3 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-async function startServer() {
-  try {
-    if (!process.env.MONGO_URI) {
-      throw new Error("MONGO_URI environment variable is missing!");
-    }
-
-    // Attempt connection
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("=== MongoDB connected successfully ===");
-
-    // 2. ONLY start listening once the DB is connected
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-
-  } catch (error) {
-    console.error("❌ CRITICAL DATABASE ERROR:", error.message);
-    process.exit(1); // Force the container to crash so Railway shows you the error log
-  }
-}
-
-startServer();
