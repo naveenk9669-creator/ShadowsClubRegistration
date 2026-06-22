@@ -1,4 +1,6 @@
-/* Container framework to isolate print area style contexts */
+/* ==========================================================================
+   1. GLOBAL CONTAINER & ENVIRONMENT ADJUSTMENTS
+   ========================================================================== */
 .mc-container {
   display: flex;
   flex-direction: column;
@@ -8,13 +10,25 @@
   padding: 40px;
 }
 
-/* Card Body container establishing Navy Blue background & Dimensions */
+/* Peripheral note outside the card */
+.mc-card-print-note {
+  color: #7c889b;
+  font-size: 0.8rem;
+  text-align: center;
+  line-height: 1.5;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   2. MAIN CARD CANVAS (SCREEN DISPLAY)
+   ========================================================================== */
 .mc-card-body {
   width: 650px;
   height: 380px;
   background: linear-gradient(135deg, #05266b 0%, #021641 100%);
   border-radius: 24px;
-  padding: 24px 28px;
+  padding: 24px 28px 24px 28px; /* Safe padding zones */
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -23,7 +37,9 @@
   overflow: hidden;
 }
 
-/* Header context aligning Title and Right badge graphic */
+/* ==========================================================================
+   3. HEADER SECTION
+   ========================================================================== */
 .mc-header {
   display: flex;
   justify-content: space-between;
@@ -42,7 +58,7 @@
 .mc-single-line-title {
   color: #df9e28;
   font-size: 1.45rem; 
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.5px;
   white-space: nowrap;
   overflow: hidden;
@@ -53,10 +69,10 @@
 
 .mc-member-card-title {
   color: #ffffff;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 700;
   letter-spacing: 2px;
-  margin: 4px 0 0 0;
+  margin: 6px 0 0 0;
 }
 
 /* Logo Badge Formatting */
@@ -84,23 +100,49 @@
   letter-spacing: -0.2px;
 }
 
+/* Container wrapper setup to replace the text badge box layout */
+.mc-logo-image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;          /* Increased width allocation */
+  height: auto;
+  max-height: 45px;     /* Increased max-height limit */
+  margin-left: auto;    /* Pushes cleanly into the far right corner frame edge */
+  margin-top: -4px;     /* Shifts the logo up into the header frame */
+  padding-right: 5px;
+}
+
+/* Image containment rules to preserve transparent proportions */
+.mc-brand-logo-img {
+  width: 150%;
+  height: auto;
+  object-fit: contain;  /* Keeps the soccer ball and text crisp and un-stretched */
+  display: block;
+}
+
+/* ==========================================================================
+   4. CENTRAL PROFILE & IDENTITY SECTION
+   ========================================================================== */
 /* Profile Row for Image and Parallel Text Alignment */
 .mc-profile-row {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 24px;
   margin-top: 25px;
   width: 100%;
 }
 
+/* Photo Frame Container - Increased Frame Box Size */
 .mc-photo-frame {
-  width: 105px;
-  height: 125px;
-  border: 1.5px solid #df9e28;
-  border-radius: 8px;
+  width: 120px;         /* Increased profile size */
+  height: 142px;        /* Increased frame block bounds */
+  border: 2px solid #df9e28; /* Slightly thicker border match */
+  border-radius: 10px;
   overflow: hidden;
   background-color: #010d29;
   flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .mc-photo-frame img {
@@ -109,36 +151,45 @@
   object-fit: cover;
 }
 
-/* Name and ID values scaled down and aligned parallel next to image */
+/* Identity Info Block Layout */
 .mc-identity-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: left;
+  gap: 5px;             /* Perfectly matching uniform gaps */
 }
 
+/* Member Name Text - Decreased Size to prevent visual bulk */
 .mc-member-name-text {
   color: #ffffff;
-  font-size: 1.55rem; /* Scaled down from 1.9rem to prevent visual bulk */
-  font-weight: 600;
-  margin: 0 0 6px 0;
+  font-size: 1.35rem;   /* Decreased size */
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
 }
 
+/* Member ID Number - Decreased Size */
 .mc-member-id-value {
   color: #8fa4c3;
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 1px;
+  font-size: 0.88rem;   /* Decreased size */
+  font-weight: 600;
+  letter-spacing: 0.5px;
   margin: 0;
+  line-height: 1.2;
 }
 
+/* ==========================================================================
+   5. BASE LAYOUT & FIXED PROPERTY LINES
+   ========================================================================== */
 /* Base Metadata Footer Layout Adjustment */
 .mc-footer-meta {
   margin-top: auto;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding-bottom: 20px; /* Shifted upward to keep content out of golden bottom bar */
+  /* Leaves a fixed 28px safety pocket at the bottom so the address text never hits the footer line */
+  padding-bottom: 28px; 
   width: 100%;
   box-sizing: border-box;
 }
@@ -164,15 +215,16 @@
   margin: 0;
 }
 
+/* Address Block Size constraint */
 .mc-address-block {
-  width: 65%;
+  width: 75%;
   text-align: right;
 }
 
 .mc-address-value-text {
   color: #ffffff;
-  font-size: 0.72rem;
-  line-height: 1.35;
+  font-size: 0.70rem;   /* Optimized for high density Tamil characters */
+  line-height: 1.3;
   font-weight: 400;
   margin: 0;
   word-wrap: break-word;
@@ -188,75 +240,96 @@
   background-color: #df9e28;
 }
 
-/* Peripheral note outside the card */
-.mc-card-print-note {
-  color: #7c889b;
-  font-size: 0.8rem;
-  text-align: center;
-  line-height: 1.5;
-  margin-top: 15px;
-  font-weight: 500;
-}
-
+/* Property/Disclaimer Text Line - Absolutely pinned to prevent any zoom movement */
 .card-footer-property-text {
-  width: 100%;
+  position: absolute;   /* Removes it from the fluid content stream */
+  bottom: 12px;         /* Anchors it exactly 12px from the bottom edge */
+  left: 0;
+  width: 100%;          /* Spans across the full card body */
   text-align: center;
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: 11px; /* Scaled down perfectly for a card layout */
-  font-weight: 500;
-  color: #df9e28; /* Clean slate-charcoal gray shade matching the image */
-  line-height: 1.4;
-  margin-top: 8px; /* Safe breathing space below the gold bar edge */
-  letter-spacing: 0.2px;
-}
-
-/* Container wrapper setup to replace the text badge box layout */
-.mc-logo-image-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 95px;          /* Preserves horizontal space balance in header */
-  height: auto;
-  max-height: 30px;     /* Keeps the logo clean inside the dark blue bar context */
-  margin-left: auto;    /* Pushes neatly into the far right corner frame edge */
-  padding-right: 5px;
-}
-
-/* Image containment rules to preserve transparent proportions */
-.mc-brand-logo-img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;  /* Makes sure the football and text graphics don't squash */
-  display: block;
-}
-
-/* Property terms strip spacing styling rules */
-.card-footer-property-text {
-  width: 100%;
-  text-align: center;
-  font-family: system-ui, -apple-system, sans-serif;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 10.5px;
+  font-weight: 600;
   color: #df9e28;
-  line-height: 1.4;
-  margin-top: 8px;
-  letter-spacing: 0.2px;
-}
-.mc-logo-image-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 95px;          /* Preserves horizontal space balance in header */
-  height: auto;
-  max-height: 30px;     /* Allows a clean height bounds */
-  margin-left: auto;    /* Pushes cleanly into the far right corner frame edge */
-  margin-top: -6px;     /* Shifts the logo up into the header frame */
-  padding-right: 5px;
+  line-height: 1.2;
+  letter-spacing: 0.1px;
+  z-index: 5;           /* Keeps it rendering cleanly over background fills */
+  margin: 0;            /* Clears out fluid margins causing zoom shifts */
 }
 
-.mc-brand-logo-img {
-  width: 150%;
-  height: auto;
-  object-fit: contain;  /* Keeps the soccer ball and text crisp and un-stretched */
-  display: block;
+/* ==========================================================================
+   6. PRINT STYLES: Automatically forces CR80 Card Size on Print
+   ========================================================================== */
+@media print {
+  /* Hide headers, footers, and background web pages */
+  body, html {
+    margin: 0;
+    padding: 0;
+    background: none;
+  }
+
+  /* Force the card body to exact credit card physical dimensions */
+  .mc-card-body {
+    width: 3.375in !important;   /* Standard CR80 Card Width */
+    height: 2.125in !important;  /* Standard CR80 Card Height */
+    border-radius: 12px !important; /* Proportional scale down for corners */
+    padding: 12px 14px 14px 14px !important; /* Compact padding for small physical space */
+    position: relative !important;
+    overflow: hidden !important;
+    box-shadow: none !important; 
+    
+    /* Crucial: Forces the navy blue background gradient to print */
+    -webkit-print-color-adjust: exact !important; 
+    print-color-adjust: exact !important;
+  }
+
+  /* Scale header text for a small plastic card */
+  .mc-single-line-title {
+    font-size: 0.65rem !important;
+  }
+  .mc-member-card-title {
+    font-size: 0.42rem !important;
+    margin: 2px 0 0 0 !important;
+  }
+  .mc-logo-image-wrapper {
+    width: 45px !important;
+    max-height: 20px !important;
+  }
+
+  /* Scale profile and text down so it doesn't overflow the tiny card */
+  .mc-profile-row {
+    gap: 10px !important;
+    margin-top: 10px !important;
+  }
+  .mc-photo-frame {
+    width: 48px !important;
+    height: 58px !important;
+  }
+  .mc-member-name-text {
+    font-size: 0.65rem !important;
+  }
+  .mc-member-id-value {
+    font-size: 0.45rem !important;
+  }
+
+  /* Fix Address text size for print layout */
+  .mc-address-value-text {
+    font-size: 0.35rem !important;
+    line-height: 1.2 !important;
+  }
+  .mc-footer-meta {
+    padding-bottom: 16px !important; /* Adjust pocket for small print */
+  }
+
+  /* Keep the footer text absolutely locked at the bottom edge of the plastic card */
+  .card-footer-property-text {
+    position: absolute !important;
+    bottom: 6px !important; /* Pinned right above the bottom accent bar on print */
+    font-size: 4px !important; /* Micro-text suitable for physical card layout */
+    margin: 0 !important;
+  }
+  
+  .mc-gold-accent-bar {
+    height: 3px !important;
+  }
 }

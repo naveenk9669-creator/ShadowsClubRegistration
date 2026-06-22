@@ -15,7 +15,7 @@ function MemberCardTemplate({ member = {} }) {
 
   const photoUrl = getPhotoUrl(member.photo || member.photoPreview);
 
-  return (
+return (
     <div className="mc-container" id="member-card">
       <div className="mc-card-body">
         
@@ -26,7 +26,6 @@ function MemberCardTemplate({ member = {} }) {
             <p className="mc-member-card-title">MEMBERSHIP CARD</p>
           </div>
 
-          {/* Replaced the old text divs with the imported image asset */}
           <div className="mc-logo-image-wrapper">
             <img 
               src={TeamShadowsLogo} 
@@ -55,10 +54,7 @@ function MemberCardTemplate({ member = {} }) {
 
         {/* Base Structural Metadata Footer Node */}
         <div className="mc-footer-meta">
-          <div className="mc-phone-block">
-            {/* <span className="mc-footer-label">PHONE</span>
-            <p className="mc-footer-value-text">{member.mobile || "9876543210"}</p> */}
-          </div>
+          <div className="mc-phone-block"></div>
 
           <div className="mc-address-block">
             <span className="mc-footer-label">ADDRESS</span>
@@ -68,14 +64,13 @@ function MemberCardTemplate({ member = {} }) {
           </div>
         </div>
 
+        {/* PLACED BACK INSIDE: Positioned right above the gold bar layer */}
+        <div className="card-footer-property-text">
+          This card remains the property of SHADOWS RECREATION CLUB. Present at entry. Non-transferable.
+        </div>
+
         {/* Golden Base Horizontal Strip Accent */}
         <div className="mc-gold-accent-bar"></div>
-        
-        {/* English legal notices footer declaration strip */}
-        <div className="card-footer-property-text">
-          This card remains the property of SHADOWS RECREATION CLUB. Present at entry.
-          Non-transferable.
-        </div>
       </div>
     </div>
   );
