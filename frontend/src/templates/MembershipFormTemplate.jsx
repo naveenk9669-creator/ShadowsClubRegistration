@@ -1,7 +1,8 @@
 import React from "react";
 import "./MembershipFormTemplate.css";
 
-const API = "http://localhost:5000";
+const API = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 
 function MembershipFormTemplate({ member = {} }) {
   const getPhotoUrl = (photo) => {

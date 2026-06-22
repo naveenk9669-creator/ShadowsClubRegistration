@@ -14,7 +14,8 @@ import jsPDF from "jspdf";
 import MembershipFormTemplate from "./templates/MembershipFormTemplate";
 import MemberCardTemplate from "./templates/MemberCardTemplate";
 
-const API = "http://localhost:5000";
+const API = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 
 function MembersList({ onBack }) {
   const [members, setMembers] = useState([]);

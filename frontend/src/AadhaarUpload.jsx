@@ -4,7 +4,7 @@ import "./AadhaarUpload.css";
 import MemberCardTemplate from "./templates/MemberCardTemplate";
 import { FiUsers, FiLogOut, FiUploadCloud, FiCamera, FiCheckCircle, FiFileText } from "react-icons/fi";
 
-const API = "http://localhost:5000";
+const API = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 function AadhaarUpload({  onLogout, onViewMembers }) {
   const fileInputRef = useRef(null);

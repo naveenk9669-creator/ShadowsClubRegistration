@@ -7,6 +7,7 @@ import "./App.css";
 
 function Login({ onLoginSuccess }) {
   const showCreateUser = true;
+  const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
   const [mode, setMode] = useState("login");
   const [username, setUsername] = useState("");
@@ -46,8 +47,8 @@ function Login({ onLoginSuccess }) {
 
     const url =
       mode === "login"
-        ? "http://localhost:5000/api/auth/login"
-        : "http://localhost:5000/api/auth/register";
+        ? `${API}/api/auth/login`
+        : `${API}/api/auth/register`;
 
     try {
       const response = await fetch(url, {
