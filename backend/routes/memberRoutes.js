@@ -4,7 +4,7 @@ const Tesseract = require("tesseract.js");
 const path = require("path");
 const fs = require("fs");
 const sharp = require("sharp");
-//const pdfPoppler = require("pdf-poppler");
+const pdfPoppler = require("pdf-poppler");
 const Counter = require("../models/Counter");
 const Member = require("../models/Member");
 
@@ -349,7 +349,7 @@ async function normalizeToJpeg(filePath, mimetype, filename) {
     .toBuffer();
 }
 
-router.post("extract-aadhaar", upload.single("aadhaar"), async (req, res) => {
+router.post("/extract-aadhaar", upload.single("aadhaar"), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({
