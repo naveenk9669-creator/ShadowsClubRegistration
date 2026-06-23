@@ -14,7 +14,7 @@ import jsPDF from "jspdf";
 import MembershipFormTemplate from "./templates/MembershipFormTemplate";
 import MemberCardTemplate from "./templates/MemberCardTemplate";
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/';
 
 
 function MembersList({ onBack }) {
