@@ -7,7 +7,7 @@ import "./App.css";
 
 function Login({ onLoginSuccess }) {
   const showCreateUser = true;
-  const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   const [mode, setMode] = useState("login");
   const [username, setUsername] = useState("");

@@ -5,7 +5,7 @@ function CreateUser() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-    const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+    const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 
   const handleCreateUser = async (e) => {

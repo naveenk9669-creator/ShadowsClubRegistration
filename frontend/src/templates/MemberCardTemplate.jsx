@@ -4,7 +4,7 @@ import "./MemberCardTemplate.css";
 import TeamShadowsLogo from "./TeamShadowsLogo.png";
 
 function MemberCardTemplate({ member = {} }) {
-const API = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 
   const getPhotoUrl = (photo) => {
