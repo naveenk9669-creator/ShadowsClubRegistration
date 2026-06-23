@@ -11,8 +11,7 @@ body {
 
 .login-page {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at bottom right, rgba(179, 72, 10, 0.55), transparent 32%),
+  background: radial-gradient(circle at bottom right, rgba(179, 72, 10, 0.55), transparent 32%),
     linear-gradient(135deg, #081428 0%, #0d1426 45%, #17131d 70%, #2b140b 100%);
   display: flex;
   flex-direction: column;
@@ -70,14 +69,6 @@ body {
   color: #59677e;
   font-size: 15px;
   margin-bottom: 42px;
-}
-
-form label {
-  display: block;
-  color: #071226;
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 10px;
 }
 
 .input-box {
@@ -161,19 +152,6 @@ form label {
   font-weight: 600;
 }
 
-@media (max-width: 600px) {
-  .login-card {
-    width: 90%;
-    padding: 34px 24px;
-  }
-
-  .brand h1,
-  .brand h2 {
-    font-size: 24px;
-    letter-spacing: 8px;
-  }
-}
-
 .message-text {
   margin-top: -12px;
   margin-bottom: 18px;
@@ -204,45 +182,18 @@ form label {
   padding: 11px 14px;
   font-size: 15px;
   outline: none;
-  color: #000000 !important;
+  color: black;
   font-weight: 500;
-  color: #666;
 }
 
-.top-header {
-  height: 95px;
-  background: #081428;
-  color: #ffc629;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 15px 26% 0;
-}
-
-.top-header h1 {
-  font-size: 21px;
-  letter-spacing: 6px;
-  font-weight: 800;
-  margin: 0;
-}
-
-.top-header p {
-  margin-top: 4px;
-  font-size: 14px;
-  color: #ffc629;
-  line-height: 1;
-}
 form label {
-    display: block;
-    color: #071226;
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-align: left;
+  display: block;
+  color: #071226;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: left;
 }
-
-
-
 
 .input-icon {
   padding-right: 8px;
@@ -256,34 +207,37 @@ form label {
 }
 
 .top-header {
-  width: 100%;
   height: 88px;
   background: #081428;
+  color: #ffc629;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 15px 26% 0;
+  width: 100%;
   position: relative;
 }
 
 .top-header > div:first-child {
   width: 520px;
-  text-align: left;
+  text-align: center;
 }
 
 .top-header h1 {
-  margin: 0;
-  color: #ffc629;
   font-size: 21px;
   letter-spacing: 5px;
   font-weight: 900;
+  margin: 0;
+  color: #ffc629;
   line-height: 1.2;
 }
 
 .top-header p {
-  margin: 4px 0 0;
-  color: #ffc629;
+  margin-top: 4px;
   font-size: 13px;
+  color: #ffc629;
   line-height: 1.2;
+  margin: 4px 0 0;
 }
 
 .header-icons {
@@ -409,6 +363,17 @@ form label {
 }
 
 @media (max-width: 600px) {
+  .login-card {
+    width: 90%;
+    padding: 34px 24px;
+  }
+
+  .brand h1,
+  .brand h2 {
+    font-size: 24px;
+    letter-spacing: 8px;
+  }
+
   .top-header {
     height: 88px;
     justify-content: flex-start;
@@ -449,4 +414,6 @@ form label {
   .upload-card {
     padding: 30px 24px;
   }
+
 }
+

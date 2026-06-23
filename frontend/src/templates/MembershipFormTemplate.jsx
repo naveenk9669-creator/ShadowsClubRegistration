@@ -1,18 +1,9 @@
 import React from "react";
 import "./MembershipFormTemplate.css";
-
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/';
-
+import { getPhotoUrl } from "../apiConfig";
 
 function MembershipFormTemplate({ member = {} }) {
-  const getPhotoUrl = (photo) => {
-  if (!photo) return "";
-  if (photo.startsWith("http")) return photo;
-  if (photo.startsWith("blob:")) return photo;
-  return `${API}/${photo.replace(/\\/g, "/")}`;
-};
-
-const photoUrl = getPhotoUrl(member.photo || member.photoPreview);
+  const photoUrl = getPhotoUrl(member.photo || member.photoPreview);
  
   return (
     <div className="mf-a4-container">

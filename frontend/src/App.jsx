@@ -34,7 +34,12 @@ if (window.location.pathname === "/member-form") {
   }
 
   if (page === "members") {
-    return <MembersList onBack={() => setPage("create")} />;
+    return (
+      <MembersList
+        onBack={() => setPage("create")}
+        onLogout={handleLogout}
+      />
+    );
   }
 
   if (window.location.pathname === "/member-document") {
