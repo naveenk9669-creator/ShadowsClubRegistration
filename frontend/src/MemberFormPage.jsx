@@ -2,6 +2,7 @@ import MembershipFormTemplate from "./templates/MembershipFormTemplate";
 import { useEffect } from "react";
 
 function MemberFormPage() {
+   const member = JSON.parse(localStorage.getItem("selectedMember") || "{}");
 
   useEffect(() => {
   const params = new URLSearchParams(window.location.search);
@@ -10,9 +11,7 @@ function MemberFormPage() {
     setTimeout(() => window.print(), 500);
   }
 }, []);
-  const member = JSON.parse(
-    localStorage.getItem("memberFormData") || "{}"
-  );
+
 
   const downloadPdf = async () => {
   const input = document.getElementById("membership-form");

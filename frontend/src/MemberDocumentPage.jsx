@@ -17,7 +17,7 @@ function MemberDocumentPage() {
     setTimeout(() => downloadPDF(), 800);
   }
 }, []);
-  const member = JSON.parse(localStorage.getItem("memberDocumentData") || "{}");
+const member = JSON.parse(localStorage.getItem("selectedMember") || "{}");
 
 
 

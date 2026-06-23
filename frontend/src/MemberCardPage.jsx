@@ -10,9 +10,7 @@ function MemberCardPage() {
     setTimeout(() => window.print(), 500);
   }
 }, []);
-  const member = JSON.parse(
-    localStorage.getItem("memberCardData") || "{}"
-  );
+ const member = JSON.parse(localStorage.getItem("selectedMember") || "{}");
 
   const downloadCardPdf = async () => {
   const input = document.getElementById("member-card");
