@@ -405,7 +405,7 @@ router.post("extract-aadhaar", upload.single("aadhaar"), async (req, res) => {
   }
 });
 
-router.post("submit-data", upload.single("photo"), async (req, res) => {
+router.post("/submit-data", upload.single("photo"), async (req, res) => {
   try {
     if (!req.body.memberId) {
       return res.status(400).json({
@@ -458,7 +458,7 @@ router.post("submit-data", upload.single("photo"), async (req, res) => {
   }
 });
 
-router.get("view-members", async (req, res) => {
+router.get("/view-members", async (req, res) => {
   try {
     const members = await Member.find().sort({ createdAt: -1 });
 
@@ -475,7 +475,7 @@ router.get("view-members", async (req, res) => {
   }
 });
 
-router.delete("delete-member/:memberId", async (req, res) => {
+router.delete("/delete-member/:memberId", async (req, res) => {
   try {
     const deletedMember = await Member.findOneAndDelete({
       memberId: req.params.memberId,

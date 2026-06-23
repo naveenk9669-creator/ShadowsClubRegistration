@@ -30,9 +30,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.get("/test", (req, res) => {
-  res.json({ success: true, message: "Auth route working" });
-});
 
 // Login user
 router.post("/login", async (req, res) => {
