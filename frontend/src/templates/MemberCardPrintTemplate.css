@@ -1,0 +1,292 @@
+.pc-card {
+  width: 85.6mm;
+  height: 53.98mm;
+  background: linear-gradient(135deg, #05266b 0%, #021641 100%);
+  border-radius: 3mm;
+  padding: 4mm 5mm;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+.pc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.pc-header h1 {
+  margin: 0;
+  color: #f2b233;
+  font-size: 8.2px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.pc-header p {
+  margin: 2mm 0 0;
+  font-size: 5.8px;
+  font-weight: 800;
+  letter-spacing: 2.2px;
+}
+
+.pc-logo {
+  width: 21mm;
+  height: auto;
+  object-fit: contain;
+  margin-top: 1mm;
+}
+
+.pc-body {
+  position: absolute;
+  left: 5mm;
+  top: 18mm;
+  display: flex;
+  align-items: center;
+  gap: 6mm;
+}
+
+.pc-photo {
+  width: 20mm;
+  height: 24mm;
+  border: 1mm solid #f2b233;
+  border-radius: 2mm;
+  overflow: hidden;
+  background: white;
+  flex-shrink: 0;
+}
+
+.pc-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pc-info {
+  width: 32mm;
+  text-align: left;
+}
+
+.pc-info h2 {
+  margin: 0 0 2mm;
+  font-size: 8.8px;
+  font-weight: 800;
+  color: white;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.pc-info p {
+  margin: 0 0 1.2mm;
+  font-size: 6.2px;
+  font-weight: 700;
+  color: #9fb2d9;
+  line-height: 1.1;
+}
+
+.pc-address {
+  position: absolute;
+  right: 5mm;
+  top: 31mm;
+  width: 35mm;
+  text-align: right;
+}
+
+
+
+.pc-address p {
+  margin: 0;
+  font-size: 5px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: white;
+}
+
+.pc-note {
+  position: absolute;
+  left: 6mm;
+  right: 6mm;
+  bottom: 3mm;
+  text-align: center;
+  color: #f2b233;
+  font-size: 3.2px;
+  font-weight: 700;
+  line-height: 1.1;
+  z-index: 5;
+}
+
+.pc-gold-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2mm;
+  background: #f2b233;
+}
+
+@page {
+  size: 85.6mm 53.98mm;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body {
+    width: 85.6mm;
+    height: 53.98mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    overflow: hidden !important;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  #print-member-card,
+  #print-member-card * {
+    visibility: visible !important;
+  }
+
+  #print-member-card {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 85.6mm !important;
+    height: 53.98mm !important;
+    border-radius: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+.pc-card {
+    width: 85.6mm;
+    height: 53.98mm;
+    background: linear-gradient(135deg, #05266b 0%, #021641 100%);
+    border-radius: 3mm;
+    padding: 4mm 5mm;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+}
+
+.pc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.pc-header h1 {
+    margin: 0;
+    color: #f2b233;
+    font-size: 10.2px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.pc-header p {
+    margin: -2mm 0 0;
+    font-size: 5.8px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-align: left;
+}
+.pc-logo {
+    width: 21mm;
+    height: auto;
+    object-fit: contain;
+    margin-top: -10mm;
+}
+
+.pc-body {
+    position: absolute;
+    left: 5mm;
+    top: 16mm;
+    display: flex;
+    align-items: center;
+    gap: 4mm;
+}
+
+.pc-photo {
+    width: 17mm;
+    height: 22mm;
+    border: 0.5mm solid #f2b233;
+    border-radius: 2mm;
+    overflow: hidden;
+    background: white;
+    flex-shrink: 0;
+}
+
+.pc-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.pc-info {
+    width: 32mm;
+    text-align: left;
+}
+
+.pc-info h2 {
+    margin: 0 0 1mm;
+    font-size: 11.8px;
+    font-weight: 500;
+    color: white;
+    line-height: 1.1;
+    white-space: nowrap;
+}
+
+.pc-info p {
+    margin: 0 0 1.2mm;
+    font-size: 7.2px;
+    font-weight: 500;
+    color: #9fb2d9;
+    line-height: 1.1;
+}
+
+.pc-address {
+    position: absolute;
+    right: 5mm;
+    top: 34mm;
+    width: 73mm;
+    text-align: right;
+}
+
+.pc-address span {
+    display: block;
+    color: #9fb2d9;
+    font-size: 5.8px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-top: 2mm;
+}
+
+.pc-note {
+    position: absolute;
+    left: 6mm;
+    right: 6mm;
+    bottom: 3mm;
+    text-align: center;
+    color: #f2b233;
+    font-size: 5.2px;
+    font-weight: 700;
+    line-height: 1.1;
+    z-index: 5;
+}
+
+.pc-gold-bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2mm;
+    background: #f2b233;
+}
