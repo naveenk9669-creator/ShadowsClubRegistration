@@ -119,7 +119,13 @@ function extractAddress(lines) {
 }
 
 async function downloadImageToTemp(imageUrl) {
-  const tempPath = path.join("uploads", `${Date.now()}-aadhaar.jpg`);
+  const uploadDir = path.join(__dirname, "../uploads");
+
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+  }
+
+  const tempPath = path.join(uploadDir, `${Date.now()}-aadhaar.jpg`);
 
   const response = await axios({
     url: imageUrl,
@@ -131,7 +137,6 @@ async function downloadImageToTemp(imageUrl) {
 
   return tempPath;
 }
-
 function extractAadhaarData(text) {
   const cleanText = text.replace(/\s+/g, " ").trim();
 
@@ -320,14 +325,15 @@ async function translateTextToTamil(text) {
   return body[0].map((chunk) => chunk[0]).join("");
 }
 
-
 async function normalizeToJpeg(filePath, mimetype, filename) {
   const fileBuffer = await fs.promises.readFile(filePath);
   const lowerName = (filename || filePath || "").toLowerCase();
   const isPdf = mimetype === "application/pdf" || lowerName.endsWith(".pdf");
 
   if (isPdf) {
-    throw new Error("PDF upload is not supported in production. Please upload JPG or PNG.");
+    throw new Error(
+      "PDF upload is not supported in production. Please upload Aadhaar as JPG or PNG."
+    );
   }
 
   return sharp(fileBuffer)
@@ -336,12 +342,12 @@ async function normalizeToJpeg(filePath, mimetype, filename) {
     .jpeg({ quality: 90 })
     .toBuffer();
 }
-
 router.post(
   "/extract-aadhaar",
   uploadAadhaar.single("aadhaar"),
   async (req, res) => {
     let tempLocalPath = "";
+    let tempJpegPath = "";
 
     try {
       if (!req.file) {
@@ -353,6 +359,8 @@ router.post(
 
       const aadhaarUrl = req.file.path;
 
+      console.log("Aadhaar Cloudinary URL:", aadhaarUrl);
+
       tempLocalPath = await downloadImageToTemp(aadhaarUrl);
 
       const normalizedBuffer = await normalizeToJpeg(
@@ -361,46 +369,52 @@ router.post(
         req.file.originalname
       );
 
-      const tempJpegPath = `${tempLocalPath}.normalized.jpg`;
+      tempJpegPath = `${tempLocalPath}.normalized.jpg`;
       await fs.promises.writeFile(tempJpegPath, normalizedBuffer);
 
-      const result = await Tesseract.recognize(tempJpegPath, "eng+tam");
+      const result = await Tesseract.recognize(tempJpegPath, "eng+tam", {
+        logger: (m) => console.log(m.status, m.progress),
+      });
 
       const extractedData = extractAadhaarData(result.data.text);
       const translatedData = await translateToTamil(extractedData);
       const cleanedData = cleanExtractedData(translatedData);
 
       const memberId = await generateMemberIdFromDB();
-      cleanedData.memberId = memberId;
 
-      const member = new Member({
+
+      const finalData = {
         ...cleanedData,
         memberId,
-        status: "DRAFT",
         aadhaarFile: aadhaarUrl,
+      };
+
+      const member = new Member({
+        ...finalData,
+        status: "DRAFT",
       });
 
       await member.save();
 
-      await fs.promises.unlink(tempLocalPath).catch(() => {});
-      await fs.promises.unlink(tempJpegPath).catch(() => {});
-
       res.json({
         success: true,
-        data: cleanedData,
-        memberId,
+        data: finalData,
       });
     } catch (error) {
       console.error("Aadhaar OCR Error:", error);
 
+      res.status(500).json({
+        success: false,
+        message: error.message || "Failed to extract Aadhaar data",
+      });
+    } finally {
       if (tempLocalPath) {
         await fs.promises.unlink(tempLocalPath).catch(() => {});
       }
 
-      res.status(500).json({
-        success: false,
-        message: error.message,
-      });
+      if (tempJpegPath) {
+        await fs.promises.unlink(tempJpegPath).catch(() => {});
+      }
     }
   }
 );
