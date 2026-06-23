@@ -3,11 +3,11 @@ import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { API_PATH } from "./apiConfig";
 import "./App.css";
 
 function Login({ onLoginSuccess }) {
   const showCreateUser = true;
-  const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   const [mode, setMode] = useState("login");
   const [username, setUsername] = useState("");
@@ -47,8 +47,8 @@ function Login({ onLoginSuccess }) {
 
     const url =
       mode === "login"
-        ? `${API}api/auth/login`
-        : `${API}api/auth/register`;
+        ? API_PATH("/api/auth/login")
+        : API_PATH("/api/auth/register");
 
     try {
       const response = await fetch(url, {

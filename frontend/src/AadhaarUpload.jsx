@@ -1,11 +1,22 @@
 import { useRef, useState } from "react";
 import axios from "axios";
 import "./AadhaarUpload.css";
-import MemberCardTemplate from "./templates/MemberCardTemplate";
-import { FiUsers, FiLogOut, FiUploadCloud, FiCamera, FiCheckCircle, FiFileText } from "react-icons/fi";
-
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/';
-
+import { API_PATH } from "./apiConfig";
+import {
+  FiArrowLeft,
+  FiSearch,
+  FiEye,
+  FiDownload,
+  FiPrinter,
+  FiTrash2,
+  FiX,
+  FiLogOut,
+  FiFileText,
+  FiCheckCircle,
+  FiCamera,
+  FiUploadCloud,
+  FiUsers
+} from "react-icons/fi";
 function AadhaarUpload({  onLogout, onViewMembers }) {
   const fileInputRef = useRef(null);
   const cameraInputRef = useRef(null);
@@ -14,12 +25,9 @@ function AadhaarUpload({  onLogout, onViewMembers }) {
 
   const [currentStep, setCurrentStep] = useState(1);
   const [aadharData, setAadharData] = useState(null);
-  const [aadharPath, setAadharPath] = useState("");
   const [photoFile, setPhotoFile] = useState(null);
-  const [photoPath, setPhotoPath] = useState("");
   const [photoPreview, setPhotoPreview] = useState("");
   const [memberId, setMemberId] = useState("");
-  const [formPreviewUrl, setFormPreviewUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -38,20 +46,77 @@ function AadhaarUpload({  onLogout, onViewMembers }) {
     memberId: "",
   });
 
+  const printForm = (member) => {
+  localStorage.setItem(
+    "selectedMember",
+    JSON.stringify(member)
+  );
+
+  window.open("/member-form?print=true", "_blank");
+};
+
+
+
+const printCard = (member) => {
+  localStorage.setItem(
+    "selectedMember",
+    JSON.stringify(member)
+  );
+
+  window.open("/member-card?print=true", "_blank");
+};
+
+
+
+const viewMember = (member) => {
+  localStorage.setItem(
+    "selectedMember",
+    JSON.stringify(member)
+  );
+
+  window.open("/member-document", "_blank");
+};
+
+const downloadMemberPdf = async (member) => {
+  setPdfMember(member);
+
+  setTimeout(async () => {
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const formCanvas = await html2canvas(formRef.current, {
+      scale: 2,
+      useCORS: true,
+    });
+
+    const formImg = formCanvas.toDataURL("image/png");
+    pdf.addImage(formImg, "PNG", 0, 0, 210, 297);
+
+    pdf.addPage();
+
+    const cardCanvas = await html2canvas(cardRef.current, {
+      scale: 2,
+      useCORS: true,
+    });
+
+    const cardImg = cardCanvas.toDataURL("image/png");
+
+    pdf.addImage(cardImg, "PNG", 20, 40, 170, 100);
+
+    pdf.save(`${member.memberId}-document.pdf`);
+
+    setPdfMember(null);
+  }, 300);
+};
+
+
   const showCard = () => {
   const memberData = {
-    name: formData.name,
-    memberId: memberId,
-    mobile: formData.mobile,
-    address: formData.address,
+    ...formData,
+    memberId: memberId || formData.memberId,
     photo: photoPreview,
   };
 
-  localStorage.setItem(
-    "memberCardData",
-    JSON.stringify(memberData)
-  );
-
+  localStorage.setItem("selectedMember", JSON.stringify(memberData));
   window.open("/member-card", "_blank");
 };
 
@@ -82,7 +147,7 @@ function AadhaarUpload({  onLogout, onViewMembers }) {
 
     try {
       setLoading(true);
-      const response = await axios.post(`${API}api/members/extract-aadhaar`, data, {
+      const response = await axios.post(API_PATH("/api/members/extract-aadhaar"), data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -92,7 +157,6 @@ function AadhaarUpload({  onLogout, onViewMembers }) {
       }
 
       setAadharData(response.data.data);
-      setAadharPath(file.name);
       setFormData((prev) => ({ ...prev, ...response.data.data }));
       setSuccessMessage("");
     } catch (error) {
@@ -105,49 +169,34 @@ function AadhaarUpload({  onLogout, onViewMembers }) {
 
   const uploadPhotoFile = (file) => {
     if (!file) return;
-    setPhotoPath(file.name);
     setPhotoPreview(URL.createObjectURL(file));
     setPhotoFile(file);
   };
 
 
-  const handleGoToStep2 = async () => {
-       setLoading(true);
-  if (!aadharData) {
-    alert("Please upload Aadhaar card first");
-    return;
-  }
+  const handleGoToStep2 = () => {
+    if (!aadharData) {
+      alert("Please upload Aadhaar card first");
+      return;
+    }
 
-  if (!formData.memberId && !memberId) {
-    alert("Member ID not found. Please upload Aadhaar again.");
-    return;
-  }
+    if (!formData.memberId && !memberId) {
+      alert("Member ID not found. Please upload Aadhaar again.");
+      return;
+    }
 
-  setMemberId(formData.memberId || memberId);
-  setCurrentStep(2);
-   setLoading(false);
-};
+    setMemberId(formData.memberId || memberId);
+    setCurrentStep(2);
+  };
 
 const showForm = () => {
   const member = {
-    name: formData.name,
-    fatherName: formData.fatherName,
-    age: formData.age,
-    dob: formData.dob,
-    address: formData.address,
-    mobile: formData.mobile,
-    email: formData.email,
-    occupation: formData.occupation,
-    aadhaarNumber: formData.aadhaarNumber,
-    memberId: memberId,
-    photo: photoPreview, 
+    ...formData,
+    memberId: memberId || formData.memberId,
+    photo: photoPreview,
   };
 
-  localStorage.setItem(
-    "memberFormData",
-    JSON.stringify(member)
-  );
-
+  localStorage.setItem("selectedMember", JSON.stringify(member));
   window.open("/member-form", "_blank");
 };
   
@@ -169,7 +218,7 @@ const showForm = () => {
       payload.append("memberId", memberId);
       payload.append("photo", photoFile);
 
-      const response = await axios.post(`${API}api/members/submit-data`, payload, {
+      const response = await axios.post(API_PATH("/api/members/submit-data"), payload, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -178,8 +227,7 @@ const showForm = () => {
         return;
       }
 
-      setSuccessMessage("Form created successfully!");
-      setFormPreviewUrl(photoPreview);
+      setSuccessMessage("Member created successfully!");
       setCurrentStep(3);
     } catch (error) {
       if (process.env.NODE_ENV !== "production") console.error(error);
@@ -189,68 +237,12 @@ const showForm = () => {
     }
   };
 
-  const openPreviewWindow = () => {
-    const previewWindow = window.open("", "_blank");
-    if (!previewWindow) return null;
-
-    const html = `
-      <html>
-        <head>
-          <title>Membership Form Preview</title>
-          <style>
-            body { font-family: Arial, sans-serif; padding: 24px; }
-            h1 { font-size: 24px; margin-bottom: 16px; }
-            .row { margin-bottom: 12px; }
-            .label { font-weight: bold; }
-            img { max-width: 240px; display: block; margin-top: 16px; }
-          </style>
-        </head>
-        <body>
-          <h1>Membership Form Preview</h1>
-          <div class="row"><span class="label">Name:</span> ${formData.name}</div>
-          <div class="row"><span class="label">Father/Husband:</span> ${formData.fatherName}</div>
-          <div class="row"><span class="label">Age:</span> ${formData.age}</div>
-          <div class="row"><span class="label">DOB:</span> ${formData.dob}</div>
-          <div class="row"><span class="label">Aadhaar Number:</span> ${formData.aadhaarNumber}</div>
-          <div class="row"><span class="label">Address:</span> ${formData.address}</div>
-          <div class="row"><span class="label">Mobile:</span> ${formData.mobile}</div>
-          <div class="row"><span class="label">Email:</span> ${formData.email}</div>
-          <div class="row"><span class="label">Occupation:</span> ${formData.occupation}</div>
-          <div class="row"><span class="label">Referrer:</span> ${formData.referrerName} ${formData.referrerNumber ? `(${formData.referrerNumber})` : ""}</div>
-          <div class="row"><span class="label">Member ID:</span> ${memberId}</div>
-          ${photoPreview ? `<img src="${photoPreview}" alt="Member Photo" />` : ""}
-        </body>
-      </html>
-    `;
-
-    previewWindow.document.open();
-    previewWindow.document.write(html);
-    previewWindow.document.close();
-    return previewWindow;
-  };
-
-  const handleDownloadPDF = () => {
-    const win = openPreviewWindow();
-    if (!win) return;
-    win.focus();
-    win.print();
-  };
-
-  const handlePrint = () => {
-    const win = openPreviewWindow();
-    if (!win) return;
-    win.focus();
-    win.print();
-  };
 
   const resetForm = () => {
     setCurrentStep(1);
     setAadharData(null);
-    setAadharPath("");
-    setPhotoPath("");
     setPhotoPreview("");
     setMemberId("");
-    setFormPreviewUrl("");
     setSuccessMessage("");
     setFormData({
       name: "",
@@ -271,7 +263,7 @@ const showForm = () => {
   return (
     <div className="aadhaar-page">
       <header className="top-header">
-        <div>
+        <div className="header-content">
           <h1>SHADOWS RECREATION CLUB</h1>
           <p>உறுப்பினர் சேர்க்கை விண்ணப்பம்</p>
         </div>
@@ -475,19 +467,33 @@ const showForm = () => {
             {successMessage && <div className="success-alert"><FiCheckCircle size={16} /> {successMessage}</div>}
             <h2>Membership Form</h2>
             <hr />
-            <button
-  className="main-action-btn"
-  type="button"
- onClick={showCard}>
-  Generate Card
-</button>
-<button className="main-action-btn" type="button" onClick={showForm}>
-  Generate Form
-</button>
-            <button className="main-action-btn" type="button" onClick={() => alert("Generate Form is not available yet.")}>Generate Form</button>
-            <button className="main-action-btn" type="button" onClick={() => alert("Generate Card is not available yet.")}>Generate Card</button>
-            <button className="outline-action-btn" type="button" onClick={handleDownloadPDF}>Download PDF</button>
-            <button className="outline-action-btn" type="button" onClick={handlePrint}>Print Form</button>
+
+ <div className="main-member-actions">
+  <button onClick={() => viewMember(formData)}>
+    <FiEye />
+    View
+  </button>
+
+  <button
+    className="pdf-btn"
+    onClick={() => downloadMemberPdf(formData)}
+  >
+    <FiDownload />
+    PDF
+  </button>
+
+  <button onClick={() => printForm(formData)}>
+    <FiPrinter />
+    Form
+  </button>
+
+  <button onClick={() => printCard(formData)}  className="pdf-btn">
+    <FiPrinter />
+    Card
+  </button>
+
+</div>
+
             <hr />
             <button className="text-action-btn" onClick={resetForm}>Create New Member</button>
 <button

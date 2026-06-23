@@ -7,17 +7,17 @@ import {
   FiPrinter,
   FiTrash2,
   FiX,
+  FiLogOut,
 } from "react-icons/fi";
 import "./MembersList.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import MembershipFormTemplate from "./templates/MembershipFormTemplate";
 import MemberCardTemplate from "./templates/MemberCardTemplate";
+import { API_PATH } from "./apiConfig";
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/';
 
-
-function MembersList({ onBack }) {
+function MembersList({ onBack, onLogout }) {
   const [members, setMembers] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedMember, setSelectedMember] = useState(null);
@@ -32,7 +32,7 @@ const cardRef = useRef(null);
   }, []);
 
   const fetchMembers = async () => {
-    const res = await fetch(`${API}api/members/view-members`);
+    const res = await fetch(API_PATH("/api/members/view-members"));
     const result = await res.json();
 
     if (result.success) {
@@ -65,7 +65,7 @@ const confirmDeleteMember = async () => {
 
   try {
     const response = await fetch(
-      `${API}api/members/delete-member/${deleteMember.memberId}`,
+      API_PATH(`/api/members/delete-member/${deleteMember.memberId}`),
       {
         method: "DELETE",
       }
@@ -156,13 +156,18 @@ const downloadMemberPdf = async (member) => {
   return (
     <div className="members-page">
      <header className="members-header">
-  <FiArrowLeft className="back-icon" onClick={onBack} />
+       <div className="header-left">
+         <FiArrowLeft className="back-icon" onClick={onBack} />
+       </div>
 
-  <div>
-    <h1>SHADOWS RECREATION CLUB</h1>
-    <p>Members · {filteredMembers.length} members</p>
-  </div>
-</header>
+       <div className="header-content">
+         <h1>SHADOWS RECREATION CLUB</h1>
+         <p>Members · {filteredMembers.length} members</p>
+       </div>
+
+                 <FiLogOut size={20} className="logout-icon" onClick={onLogout} />
+
+     </header>
 
       <main className="members-main">
         <div className="search-box">
@@ -213,7 +218,7 @@ const downloadMemberPdf = async (member) => {
     Form
   </button>
 
-  <button onClick={() => printCard(member)}>
+  <button onClick={() => printCard(member)}  className="pdf-btn">
     <FiPrinter />
     Card
   </button>

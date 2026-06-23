@@ -4,7 +4,6 @@ const Tesseract = require("tesseract.js");
 const path = require("path");
 const fs = require("fs");
 const sharp = require("sharp");
-const Counter = require("../models/Counter");
 const Member = require("../models/Member");
 
 const router = express.Router();
@@ -473,7 +472,7 @@ router.post(
 
 router.get("/view-members", async (req, res) => {
   try {
-    const members = await Member.find().sort({ createdAt: -1 });
+    const members = await Member.find({ status: "COMPLETED" }).sort({ createdAt: -1 });
 
     res.json({
       success: true,
