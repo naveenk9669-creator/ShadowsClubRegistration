@@ -4,7 +4,6 @@ const Tesseract = require("tesseract.js");
 const path = require("path");
 const fs = require("fs");
 const sharp = require("sharp");
-const pdfPoppler = require("pdf-poppler");
 const Counter = require("../models/Counter");
 const Member = require("../models/Member");
 
@@ -318,28 +317,7 @@ async function normalizeToJpeg(filePath, mimetype, filename) {
   const isPdf = mimetype === "application/pdf" || lowerName.endsWith(".pdf");
 
   if (isPdf) {
-    try {
-      return await sharp(fileBuffer, { density: 200 })
-        .rotate()
-        .jpeg({ quality: 90 })
-        .toBuffer();
-    } catch (sharpError) {
-      const tempDir = path.dirname(filePath);
-      const baseName = `${path.basename(filePath, path.extname(filePath))}-pdf`;
-      const options = {
-        format: "jpeg",
-        out_dir: tempDir,
-        out_prefix: baseName,
-        page: 1,
-        dpi: 200,
-      };
-
-      //await pdfPoppler.convert(filePath, options);
-      const convertedPath = path.join(tempDir, `${baseName}-1.jpg`);
-      const jpegBuffer = await fs.promises.readFile(convertedPath);
-      await fs.promises.unlink(convertedPath).catch(() => {});
-      return jpegBuffer;
-    }
+    throw new Error("PDF upload is not supported in production. Please upload JPG or PNG.");
   }
 
   return sharp(fileBuffer)
