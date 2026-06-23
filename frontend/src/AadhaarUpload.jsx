@@ -82,7 +82,7 @@ function AadhaarUpload({  onLogout, onViewMembers }) {
 
     try {
       setLoading(true);
-      const response = await axios.post(`${API}/api/members/extract-aadhaar`, data, {
+      const response = await axios.post(`${API}api/members/extract-aadhaar`, data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -169,7 +169,7 @@ const showForm = () => {
       payload.append("memberId", memberId);
       payload.append("photo", photoFile);
 
-      const response = await axios.post(`${API}/api/members/submit-data`, payload, {
+      const response = await axios.post(`${API}api/members/submit-data`, payload, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

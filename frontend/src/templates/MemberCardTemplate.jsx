@@ -11,7 +11,7 @@ const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/';
     if (!photo) return "";
     if (photo.startsWith("blob:")) return photo;
     if (photo.startsWith("http")) return photo;
-    return `${API}/${photo.replace(/\\/g, "/")}`;
+    return `${API}${photo.replace(/\\/g, "/")}`;
   };
 
   const photoUrl = getPhotoUrl(member.photo || member.photoPreview);

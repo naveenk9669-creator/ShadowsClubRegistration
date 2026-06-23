@@ -32,7 +32,7 @@ const cardRef = useRef(null);
   }, []);
 
   const fetchMembers = async () => {
-    const res = await fetch(`${API}/api/members/view-members`);
+    const res = await fetch(`${API}sapi/members/view-members`);
     const result = await res.json();
 
     if (result.success) {
@@ -65,7 +65,7 @@ const confirmDeleteMember = async () => {
 
   try {
     const response = await fetch(
-      `${API}/api/members/delete-member/${deleteMember.memberId}`,
+      `${API}api/members/delete-member/${deleteMember.memberId}`,
       {
         method: "DELETE",
       }

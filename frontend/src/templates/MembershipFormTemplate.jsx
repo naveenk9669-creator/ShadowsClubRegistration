@@ -8,7 +8,7 @@ function MembershipFormTemplate({ member = {} }) {
   const getPhotoUrl = (photo) => {
     if (!photo) return "";
     if (photo.startsWith("blob:") || photo.startsWith("http")) return photo;
-    return `${API}/${photo.replace(/\\/g, "/")}`;
+    return `${API}${photo.replace(/\\/g, "/")}`;
   };
 
   const photoUrl = getPhotoUrl(member.photo || member.photoPreview);

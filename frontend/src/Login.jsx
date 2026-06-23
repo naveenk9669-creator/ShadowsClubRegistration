@@ -47,8 +47,8 @@ function Login({ onLoginSuccess }) {
 
     const url =
       mode === "login"
-        ? `${API}/api/auth/login`
-        : `${API}/api/auth/register`;
+        ? `${API}api/auth/login`
+        : `${API}api/auth/register`;
 
     try {
       const response = await fetch(url, {

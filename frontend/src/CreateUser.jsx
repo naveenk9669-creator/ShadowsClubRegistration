@@ -12,7 +12,7 @@ function CreateUser() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${API}/api/auth/register`, {
+      const response = await fetch(`${API}api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
