@@ -9,13 +9,11 @@ const Member = require("../models/Member");
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
-  filename: (req, file, cb) =>
-    cb(null, Date.now() + "-" + file.originalname),
-});
+const axios = require("axios");
+const { aadhaarStorage, memberPhotoStorage } = require("../config/cloudinary");
 
-const upload = multer({ storage });
+const uploadAadhaar = multer({ storage: aadhaarStorage });
+const uploadMemberPhoto = multer({ storage: memberPhotoStorage });
 
 function cleanOcrValue(value) {
   if (!value) return "";
@@ -120,7 +118,19 @@ function extractAddress(lines) {
   return addressLines.join(", ");
 }
 
+async function downloadImageToTemp(imageUrl) {
+  const tempPath = path.join("uploads", `${Date.now()}-aadhaar.jpg`);
 
+  const response = await axios({
+    url: imageUrl,
+    method: "GET",
+    responseType: "arraybuffer",
+  });
+
+  await fs.promises.writeFile(tempPath, response.data);
+
+  return tempPath;
+}
 
 function extractAadhaarData(text) {
   const cleanText = text.replace(/\s+/g, " ").trim();
@@ -327,114 +337,125 @@ async function normalizeToJpeg(filePath, mimetype, filename) {
     .toBuffer();
 }
 
-router.post("/extract-aadhaar", upload.single("aadhaar"), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json({
+router.post(
+  "/extract-aadhaar",
+  uploadAadhaar.single("aadhaar"),
+  async (req, res) => {
+    let tempLocalPath = "";
+
+    try {
+      if (!req.file) {
+        return res.status(400).json({
+          success: false,
+          message: "Please upload Aadhaar file",
+        });
+      }
+
+      const aadhaarUrl = req.file.path;
+
+      tempLocalPath = await downloadImageToTemp(aadhaarUrl);
+
+      const normalizedBuffer = await normalizeToJpeg(
+        tempLocalPath,
+        req.file.mimetype,
+        req.file.originalname
+      );
+
+      const tempJpegPath = `${tempLocalPath}.normalized.jpg`;
+      await fs.promises.writeFile(tempJpegPath, normalizedBuffer);
+
+      const result = await Tesseract.recognize(tempJpegPath, "eng+tam");
+
+      const extractedData = extractAadhaarData(result.data.text);
+      const translatedData = await translateToTamil(extractedData);
+      const cleanedData = cleanExtractedData(translatedData);
+
+      const memberId = await generateMemberIdFromDB();
+      cleanedData.memberId = memberId;
+
+      const member = new Member({
+        ...cleanedData,
+        memberId,
+        status: "DRAFT",
+        aadhaarFile: aadhaarUrl,
+      });
+
+      await member.save();
+
+      await fs.promises.unlink(tempLocalPath).catch(() => {});
+      await fs.promises.unlink(tempJpegPath).catch(() => {});
+
+      res.json({
+        success: true,
+        data: cleanedData,
+        memberId,
+      });
+    } catch (error) {
+      console.error("Aadhaar OCR Error:", error);
+
+      if (tempLocalPath) {
+        await fs.promises.unlink(tempLocalPath).catch(() => {});
+      }
+
+      res.status(500).json({
         success: false,
-        message: "Please upload Aadhaar file",
+        message: error.message,
       });
     }
-
-    const filePath = path.resolve(req.file.path);
-    const normalizedBuffer = await normalizeToJpeg(
-      filePath,
-      req.file.mimetype,
-      req.file.originalname
-    );
-
-    const tempJpegPath = `${filePath}.normalized.jpg`;
-    await fs.promises.writeFile(tempJpegPath, normalizedBuffer);
-
-    const result = await Tesseract.recognize(tempJpegPath, "eng+tam", {
-      logger: (m) => console.log(m.status, m.progress),
-    });
-
-    const extractedData = extractAadhaarData(result.data.text);
-    const translatedData = await translateToTamil(extractedData);
-    const cleanedData = cleanExtractedData(translatedData);
-
-    const memberId = await generateMemberIdFromDB();
-    cleanedData.memberId = memberId;
-
-    const member = new Member({
-      ...cleanedData,
-      memberId,
-      status: "DRAFT",
-      aadhaarFile: req.file ? req.file.path : "",
-    });
-
-    await member.save();
-
-    await fs.promises.unlink(tempJpegPath).catch(() => {});
-
-    res.json({
-      success: true,
-      data: cleanedData,
-      memberId,
-    });
-  } catch (error) {
-    console.error("Aadhaar OCR Error:", error);
-
-    res.status(500).json({
-      success: false,
-      message: "Failed to extract Aadhaar data. Please upload a clear JPG, PNG, HEIC or PDF image.",
-    });
   }
-});
-
-router.post("/submit-data", upload.single("photo"), async (req, res) => {
-  try {
-    if (!req.body.memberId) {
+);
+router.post(
+  "/submit-data",
+  uploadMemberPhoto.single("photo"),
+  async (req, res) => {
+    try {
+       if (!req.body.memberId) {
       return res.status(400).json({
         success: false,
         message: "Member ID is required",
       });
     }
-
-    const updatedMember = await Member.findOneAndUpdate(
-      { memberId: req.body.memberId },
-      {
-        $set: {
-          name: req.body.name,
-          fatherName: req.body.fatherName,
-          age: req.body.age,
-          dob: req.body.dob,
-          address: req.body.address,
-          aadhaarNumber: req.body.aadhaarNumber,
-          mobile: req.body.mobile,
-          email: req.body.email,
-          occupation: req.body.occupation,
-          referrerName: req.body.referrerName,
-          referrerNumber: req.body.referrerNumber,
-          photo: req.file ? req.file.path : "",
-          status: "COMPLETED",
+      const updatedMember = await Member.findOneAndUpdate(
+        { memberId: req.body.memberId },
+        {
+          $set: {
+            name: req.body.name,
+            fatherName: req.body.fatherName,
+            age: req.body.age,
+            dob: req.body.dob,
+            address: req.body.address,
+            aadhaarNumber: req.body.aadhaarNumber,
+            mobile: req.body.mobile,
+            email: req.body.email,
+            occupation: req.body.occupation,
+            referrerName: req.body.referrerName,
+            referrerNumber: req.body.referrerNumber,
+            photo: req.file ? req.file.path : "",
+            status: "COMPLETED",
+          },
         },
-      },
-      { new: true }
-    );
-
-    if (!updatedMember) {
+        { new: true }
+      );
+      if (!updatedMember) {
       return res.status(404).json({
         success: false,
         message: "Member not found for this Member ID",
       });
     }
 
-    res.json({
-      success: true,
-      message: "Member updated successfully",
-      data: updatedMember,
-    });
-  } catch (error) {
-    console.error("Update member error:", error);
-
-    res.status(500).json({
-      success: false,
-      message: "Failed to update member",
-    });
+      res.json({
+        success: true,
+         message: "Member updated successfully",
+        data: updatedMember,
+      });
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: "Failed to update member",
+      });
+    }
   }
-});
+);
 
 router.get("/view-members", async (req, res) => {
   try {
