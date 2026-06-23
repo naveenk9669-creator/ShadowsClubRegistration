@@ -6,7 +6,7 @@ const User = require("../models/User");
 const router = express.Router();
 
 // Register user
-router.post("register", async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -30,8 +30,12 @@ router.post("register", async (req, res) => {
   }
 });
 
+router.get("/test", (req, res) => {
+  res.json({ success: true, message: "Auth route working" });
+});
+
 // Login user
-router.post("login", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
